@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change HTML Content</title>
+</head>
+<body>
+    <h1>Change HTML Content</h1>
+    <p class="content">JavaScript can change HTML content.</p>
+
+    <button type="button" onclick="changeContent()">Click Me</button>
+</body>
+<script>
+function changeContent ()  {
+    let content = document.getElementsByClassName("content");   //trả về 1 danh sách
+    content[0].innerHTML = "Yes, JavaScript can change HTML content"
+}
+</script>
+</html>

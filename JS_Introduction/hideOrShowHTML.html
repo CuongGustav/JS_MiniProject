@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hide Or Show HTML</title>
+</head>
+<body>
+    <p>JavaScript can hide or show HTML elements.</p>
+    <button type="button" onclick="hideOrShow()">Click Me</button>
+</body>
+<Script>
+let isHide = false;
+function hideOrShow () {
+    if (!isHide) {
+        document.querySelector('p').style.display = 'none';
+        isHide = true;
+    } else {
+        document.querySelector('p').style.display = 'block';
+        isHide = false;
+    }
+}
+
+</Script>
+</html>

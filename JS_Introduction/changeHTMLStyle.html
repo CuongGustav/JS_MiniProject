@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change HTML Style</title>
+</head>
+<body>
+    <p>JavaScript can change the style of an HTML element.</p>
+    <button type="button" onclick="changeStyle()">Click Me</button>
+</body>
+<Script>
+let isChange = false;
+function changeStyle () {
+    if (!isChange) {
+        document.querySelector('p').style.color = 'red';
+        isChange = true;
+    } else {
+        document.querySelector('p').style.color = 'black';  
+        isChange = false;
+    }
+}    
+</Script>
+</html>
