@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+html {
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: 'roboto', arial, helvetica, sans-serif;
+    box-sizing: border-box;
+}
+.app {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 20px;
+}
+.header {
+    width: 100%;
+    margin-bottom: 20px;
+   
+}
+.header input {
+    width: 100%;
+    height: 65px;
+    font-size: 30px;
+    text-align: right;
+    border: 1px solid #ccc;
+    border-radius: 4px ;
+    pointer-events: none; /* ngăn chặn tất cả các thao tác*/
+}
+
+.buttonArea {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+.buttonArea button {
+    height: 65px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 24px;
+}
