@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap&subset=vietnamese">
+</head>
+<body>
+    <div class="app">
+        <div class="app__content">
+            <div class="header">
+                <div class="header__content">
+                    <i class="fa-solid fa-house"></i>
+                    <p class="header__content-heading">To Do</p>
+                </div>
+                <div class="header__navbar">
+                    <i class="fa-solid fa-ellipsis"></i>
+                    <div class="header__navbar-color"> 
+                        <p>theme</p>
+                        <div class="header__navbar-subColor">
+                            <div class="navbar__color 6A5ACD active"></div>
+                            <div class="navbar__color AB6AAC"></div>
+                            <div class="navbar__color D05A7A"></div>
+                            <div class="navbar__color D15B56"></div>
+                            <div class="navbar__color 389069"></div>
+                            <div class="navbar__color C2DDF3"></div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="list__item">
+                <div class="item__ongoing">
+                    <div class="item">
+                        <i class="fa-regular fa-circle item-icon icon-ongoing"></i>
+                        <i class="fa-regular fa-circle-check item-icon icon-check"></i>
+                        <i class="fa-solid fa-circle-check item-icon icon-check-done"></i>
+                        <input type="text" class="input__item" id="">
+                    </div>
+                    <div class="item">
+                        <i class="fa-regular fa-circle item-icon icon-ongoing"></i>
+                        <i class="fa-regular fa-circle-check item-icon icon-check"></i>
+                        <i class="fa-solid fa-circle-check item-icon icon-check-done"></i>
+                        <input type="text" class="input__item" id="">
+                    </div>
+                </div>
+                <div class="item-done">
+                    <div class="item-done-navigation">
+                        <i class="fa-solid fa-chevron-right"></i>
+                        <i class="fa-solid fa-chevron-done"></i>
+                        <p>
+                            Completed
+                            <span>3</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <i class="fa-regular fa-circle item-icon icon-ongoing"></i>
+                        <i class="fa-regular fa-circle-check item-icon icon-check"></i>
+                        <i class="fa-solid fa-circle-check item-icon icon-check-done"></i>
+                        <input type="text" class="input__item" id="">
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer__content">
+                    <i class="fa-solid fa-plus footer__content-icon icon-plus"></i>
+                    <i class="fa-regular fa-circle footer__content-icon icon-circle"></i>
+                    <input type="text" class="inputToDo" placeholder="Please enter your todo">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</body>
+<script src="./app.js"></script>
+</html>
