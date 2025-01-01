@@ -61,6 +61,63 @@ document.addEventListener ('click', (e) => {
         iconPlus.style.display = 'block';
     }
 })
+//update count item in div item-done
+const updateCount = ()=>{
+    const itemDone = document.querySelector('.item-done');
+    const spanCount = document.querySelector('.item-done-navigation span');
+    const itemCount = itemDone.querySelectorAll('.item').length;
+    spanCount.textContent = itemCount;
+}
+
+// Move items between divs
+const updateItemPosition = (item) => {
+    const itemDone = document.querySelector('.item-done');
+    const itemOngoing = document.querySelector('.item__ongoing');
+    const iconCheckDone = item.querySelector('.icon-check-done'); // Chỉ icon của item hiện tại
+    const iconCheckDoneStyle = window.getComputedStyle(iconCheckDone);
+    if (iconCheckDoneStyle.display === 'block') {
+        itemDone.appendChild(item);
+    } else {
+        itemOngoing.appendChild(item);
+    }
+    updateCount();
+    hideShowItemDoneNavigation();
+}
+
+// Event hover for items
+const addHoverEvent = (item) => {
+    const ongoingIcon = item.querySelector('.icon-ongoing');
+    const checkIcon = item.querySelector('.icon-check');
+    const checkDoneIcon = item.querySelector('.icon-check-done');
+    const inputItem = item.querySelector('.input__item'); 
+
+    ongoingIcon.addEventListener('mouseenter', () => {
+        ongoingIcon.style.display = 'none';
+        checkIcon.style.display = 'block';
+    });
+    ongoingIcon.addEventListener('mouseleave', () => {
+        ongoingIcon.style.display = 'block';
+        checkIcon.style.display = 'none';
+    });
+
+    checkIcon.addEventListener('click', () => {
+        if (checkDoneIcon.style.display === 'none' || checkDoneIcon.style.display === '') {
+            ongoingIcon.style.display = 'none';   
+            checkIcon.style.display = 'none';     
+            checkDoneIcon.style.display = 'block'; 
+            inputItem.classList.add('done');
+            updateItemPosition(item); // Di chuyển item khi hoàn thành
+        }
+    });
+    checkDoneIcon.addEventListener('click', () => {
+        ongoingIcon.style.display = 'block';   
+        checkIcon.style.display = 'none';      
+        checkDoneIcon.style.display = 'none';  
+        inputItem.classList.remove('done'); 
+        updateItemPosition(item); // Di chuyển item về ongoing khi chưa hoàn thành
+    });
+};
+
 const listItem = document.querySelector('.item__ongoing');
 //add item from input to list item
 inputToDo.addEventListener('keydown', (e) => {
@@ -80,13 +137,89 @@ inputToDo.addEventListener('keydown', (e) => {
         const input = document.createElement('input')
         input.type = 'text';
         input.value = inputToDo.value.trim();
-        input.readOnly = true;
+        input.readOnly = false;
         input.classList.add('input__item');
         newItem.appendChild(input);
 
         listItem.appendChild(newItem);
         inputToDo.value = '';
 
+        deleteItem();
         addHoverEvent(newItem);
+        addRightClickMenu();
     }
 });
+//for each item
+const items = document.querySelectorAll('.item');
+items.forEach(addHoverEvent);
+
+//hide and show item-done-navigation
+const hideShowItemDoneNavigation = () => {
+    const itemDone = document.querySelector('.item-done');
+    const itemDoneNavigation = document.querySelector('.item-done-navigation');
+    const itemCount = itemDone.querySelectorAll('.item').length; 
+    if (itemCount !== 0) { 
+        itemDoneNavigation.style.display = "flex"; 
+    } else {
+        itemDoneNavigation.style.display = "none"; 
+    }
+};
+// hide and show item-done with navigation
+const hideShowItemDoneWithNavigation = () => {
+    const itemDone = document.querySelector('.item-done');
+    const itemDoneNavigationRight = document.querySelector('.item-done-navigation-right');
+    const itemDoneNavigationDown = document.querySelector('.item-done-navigation-down');
+    const itemDoneNavigation = document.querySelector('.item-done-navigation');
+
+    itemDoneNavigation.addEventListener('click', () => {
+        if (itemDoneNavigationRight.style.display === 'none') {
+            itemDoneNavigationDown.style.display = 'none';
+            itemDoneNavigationRight.style.display = 'block';
+            itemDone.style.display = 'none';
+        } else {
+            itemDoneNavigationDown.style.display = 'block';
+            itemDoneNavigationRight.style.display = 'none';
+            itemDone.style.display = 'block';
+        }
+    });
+};
+hideShowItemDoneWithNavigation();
+
+//show form delete when right-click 
+const deleteItem = () => {
+    const deleteMenu = document.getElementById('deleteMenu');
+    const deleteModal = document.getElementById('deleteModal');
+    const confirmDelete = document.getElementById('confirmDelete');
+    const cancelDelete = document.getElementById('cancelDelete');
+    let itemToDelete = null;
+    document.querySelectorAll('.item').forEach(item => {
+        item.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            itemToDelete = item;
+            const x = e.pageX;
+            const y = e.pageY;
+            deleteMenu.style.left = `${x}px`;
+            deleteMenu.style.top = `${y}px`;
+            deleteMenu.style.display = 'block';
+        });
+    });
+    document.addEventListener('click', () => {
+        deleteMenu.style.display = 'none';
+    });
+    document.querySelector('.delete-option').addEventListener('click', () => {
+        deleteModal.style.display = 'flex'; 
+        deleteMenu.style.display = 'none'; 
+    });
+    confirmDelete.addEventListener('click', () => {
+        if (itemToDelete) {
+            itemToDelete.remove(); 
+            itemToDelete = null; 
+        }
+        deleteModal.style.display = 'none'; 
+    });
+    cancelDelete.addEventListener('click', () => {
+        deleteModal.style.display = 'none'; 
+        itemToDelete = null; 
+    });
+};
+deleteItem();
